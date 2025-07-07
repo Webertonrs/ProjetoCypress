@@ -102,15 +102,28 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
       .should('have.value', 'blog')
 
   })
-  it.only('seleciona um produto (blog) por seu indice',() => {
+  it('seleciona um produto (blog) por seu indice',() => {
     cy.get('#product')
       .select(1)
       .should('have.value', 'blog')
 
   })
+  it('marca o tipo de atendimento "Feedback', () => {
+    cy.get('input[type="radio"][value="feedback"]')
+      .check()
+      .should('be.checked')
 
+  })
 
+  it.only('marca cada tipo de atendimento', () => {
+    cy.get('input[type="radio"]')
+    .each(typeOFService => {
+      cy.wrap(typeOFService)
+        .check()
+        .should('be.checked')
+    })
 
+  })
 
 })
 
