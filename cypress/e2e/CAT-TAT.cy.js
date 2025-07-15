@@ -114,8 +114,8 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
       .should('be.checked')
 
   })
-
-  it.only('marca cada tipo de atendimento', () => {
+// como usar array
+  it('marca cada tipo de atendimento', () => {
     cy.get('input[type="radio"]')
     .each(typeOFService => {
       cy.wrap(typeOFService)
@@ -125,6 +125,22 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
 
   })
 
+it('seleciona um arquivo da pasta fixtures', () => {
+    cy.get('#file-upload')
+    .selectFile('cypress/fixtures/example.json')
+    .should(input => {
+    expect(input[0].files[0].name).to.eq('example.json')
+
+    })
+
+})
+
+it.only('verificar que a politica de privacidade abre em outra aba sem necessidade a necessidade de um clique', () => {
+     cy.contains('a', 'Política de Privacidade')
+     .should('have.attr', 'href', 'privacy.html')
+     .and('have.attr', 'target', '_blank')
+
+   })
 })
 
 
