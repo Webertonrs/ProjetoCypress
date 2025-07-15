@@ -108,7 +108,7 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
       .should('have.value', 'blog')
 
   })
-  it('marca o tipo de atendimento "Feedback', () => {
+  it.only('marca o tipo de atendimento "Feedback', () => {
     cy.get('input[type="radio"][value="feedback"]')
       .check()
       .should('be.checked')
