@@ -1,10 +1,31 @@
 name: End-to-end tests 🧪
-on: [push]
+
+on:
+  push:
+    branches:
+      - main # Opcional: Especifique a branch principal (ou outras branches) para evitar que rode em todas as branches.
+
 jobs:
   cypress-run:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest # Recomendo 'ubuntu-latest' para usar a versão mais recente do Ubuntu.
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4 # Use a versão mais recente da ação de checkout.
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4 # Use a versão mais recente da ação de setup-node.
+        with:
+          node-version: '18' # Defina a versão do Node.js que seu projeto usa (ex: '16', '18', '20').
+
+      - name: Install dependencies
+        run: npm ci # 'npm ci' é preferível para CI/CD, pois garante instalações limpas baseadas no package-lock.json
+
       - name: Cypress run
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v6 # Use a versão mais recente da ação do Cypress.
+        with:
+          # Você pode adicionar comandos específicos aqui, se necessário.
+          # Por exemplo, para rodar testes Cypress em modo headless:
+          # command: npx cypress run --record --key ${{ secrets.CYPRESS_RECORD_KEY }}
+          # build: npm run build # Se seu projeto precisar de um build antes dos testes.
+          # start: npm start # Se seu projeto precisar de um servidor rodando para os testes E2E.
