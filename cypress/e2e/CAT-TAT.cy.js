@@ -115,7 +115,7 @@ it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é p
 
   })
 
-  it.only('marca cada tipo de atendimento', () => {
+  it('marca cada tipo de atendimento', () => {
     cy.get('input[type="radio"]')
     .each(typeOFService => {
       cy.wrap(typeOFService)
